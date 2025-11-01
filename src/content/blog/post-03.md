@@ -3,7 +3,11 @@ title: Comprendiendo los Hooks de React
 date: 2023-06-15
 description: Learn how to use React Hooks to manage state and lifecycle in functional components.
 author: alice-johnson
-image: '/assets/images/post-03.png'
+image: 
+        format: "png"
+        width: 1200
+        height: 630
+        src: '/assets/images/post-03.png'
 tags: [React, JavaScript, Web Development]
 ---
 

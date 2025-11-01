@@ -2,22 +2,33 @@ import { defineCollection, reference, z } from "astro:content";
 
 const blogCollection = defineCollection({
   type: "content",
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-    description: z.string(),
-    image: z.string(),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      date: z.date(),
+      description: z.string(),
+      image: z
+        .union([
+          z.string(),
+          z.object({
+            format: z.enum(["jpg", "jpeg", "png", "gif"]).optional(),
+            width: z.number().optional(),
+            height: z.number().optional(),
+            src: z.string(),
+          }),
+        ])
+        .optional(),
 
-    //Relacion
-    // author: z.string(),
-    author: reference("author"),
+      //Relacion
+      // author: z.string(),
+      author: reference("author"),
 
-    //Relacion
-    tags: z.array(z.string()),
+      //Relacion
+      tags: z.array(z.string()),
 
-    //Filter
-    isDraft: z.boolean().default(false),
-  }),
+      //Filter
+      isDraft: z.boolean().default(false),
+    }),
 });
 
 const authorCollection = defineCollection({
