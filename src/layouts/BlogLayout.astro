@@ -1,0 +1,20 @@
+---
+const { title, ...rest } = Astro.props;
+import "../styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-900">
+    <a href="/" id="btn-back">Regresar</a>
+    <main class="mb-10 max-w-xl m-auto px-2 py-2" transition:animate="slide">
+      <slot />
+    </main>
+  </body>
+</html>

@@ -1,16 +1,36 @@
 ---
+import "../styles/global.css";
+import MainLayout from "../layouts/MainLayout.astro";
+import { siteConfig } from "../config/site-config";
+import { getCollection } from "astro:content";
+import TypedBlogPost from "src/components/TypedBlogPost.astro";
 
+const blogPosts = await getCollection(
+  "blog",
+  (post) => post.data.isDraft === false
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Arnoldo´s">
+  <!-- component -->
+  <section class="bg-white dark:bg-gray-900">
+    <div class="container px-6 py-10 mx-auto">
+      <h1
+        class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white"
+      >
+        {siteConfig.title}
+      </h1>
+
+      <a class="mr-2" href="/blog/1" class="text-white hover:underline"
+        >Blog paginado</a
+      >
+      <a class="mr-2" href="/authors" class="text-white hover:underline"
+        >Autores</a
+      >
+
+      <div class="grid grid-cols-1 gap-8 mt-16 md:mt-16 md:grid-cols-2">
+        {blogPosts.map((post) => <TypedBlogPost post={post} />)}
+      </div>
+    </div>
+  </section>
+</MainLayout>

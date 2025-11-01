@@ -1,0 +1,28 @@
+---
+import { Formatter } from "@utils/formatters";
+const { frontmatter, url } = Astro.props;
+---
+
+<div class="flex flex-col lg:flex-row lg:items-start lg:gap-6">
+  <div class="flex-shrink-0 w-full lg:w-64">
+    <img
+      class="w-full h-56 lg:h-40 object-cover rounded-lg"
+      src={frontmatter.image}
+      alt={frontmatter.title}
+    />
+  </div>
+
+  <!-- important: min-w-0 allows this flex child to shrink and avoid overflow/overlap -->
+  <div class="flex flex-col justify-between py-6 flex-1 min-w-0">
+    <a
+      href={url}
+      class="block text-xl font-semibold hover:underline text-white break-words"
+    >
+      {frontmatter.description}
+    </a>
+
+    <span class="text-sm text-gray-300">
+      {Formatter.formatDate(frontmatter.date)}
+    </span>
+  </div>
+</div>
